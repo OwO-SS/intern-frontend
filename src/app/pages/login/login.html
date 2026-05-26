@@ -1,28 +1,43 @@
-<div class="max-w-md mx-auto bg-white shadow rounded-lg p-6">
-  <h1 class="text-3xl font-bold mb-6">Login</h1>
+<div class="animate-slide-up min-h-[calc(100vh-56px-5rem)] flex items-stretch gap-0">
 
-  <p *ngIf="errorMessage" class="text-red-500 mb-3">
-    {{ errorMessage }}
-  </p>
-
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
-    <div>
-      <label class="block font-medium mb-1">Email</label>
-      <input type="email" formControlName="email" class="w-full border rounded px-3 py-2" />
+  <div class="bg-[#141417] border border-[#2a2a32] rounded-[6px] p-10 w-[420px] shrink-0 flex flex-col">
+    <div class="mb-8">
+      <span class="font-['DM_Mono',monospace] text-[0.7rem] tracking-[0.15em] uppercase text-[#e8ff47] block mb-2">Welcome back</span>
+      <h1 class="font-['Bebas_Neue',sans-serif] text-[3.5rem] tracking-[0.08em] leading-none text-[#f0f0f5] m-0 mb-4">SIGN IN</h1>
+      <div class="h-[2px] w-12 bg-[#e8ff47]"></div>
     </div>
 
-    <div>
-      <label class="block font-medium mb-1">Password</label>
-      <input type="password" formControlName="password" class="w-full border rounded px-3 py-2" />
-    </div>
+    <p *ngIf="errorMessage" class="flex items-center gap-2 bg-[#ff4545]/10 border border-[#ff4545]/30 rounded-[4px] text-[#ff4545] font-['DM_Mono',monospace] text-[0.8rem] px-[0.875rem] py-[0.6rem] mb-5">
+      <span>⚠</span> {{ errorMessage }}
+    </p>
 
-    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">
-      Login
-    </button>
-  </form>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-5">
+      <div class="flex flex-col">
+        <label class="font-['DM_Mono',monospace] text-[0.7rem] tracking-[0.12em] uppercase text-[#6b6b80] block mb-[0.4rem]">Email Address</label>
+        <input type="email" formControlName="email" placeholder="you@example.com"
+               class="font-['DM_Mono',monospace] text-[0.875rem] bg-[#1c1c21] border border-[#2a2a32] text-[#f0f0f5] rounded-[4px] px-[0.875rem] py-[0.65rem] w-full outline-none transition-all duration-150 placeholder:text-[#6b6b80] focus:border-[#e8ff47] focus:shadow-[0_0_0_2px_rgba(232,255,71,0.1)]" />
+      </div>
 
-  <p class="mt-4">
-    Don't have an account?
-    <a routerLink="/register" class="text-blue-600">Register</a>
-  </p>
+      <div class="flex flex-col">
+        <label class="font-['DM_Mono',monospace] text-[0.7rem] tracking-[0.12em] uppercase text-[#6b6b80] block mb-[0.4rem]">Password</label>
+        <input type="password" formControlName="password" placeholder="••••••••"
+               class="font-['DM_Mono',monospace] text-[0.875rem] bg-[#1c1c21] border border-[#2a2a32] text-[#f0f0f5] rounded-[4px] px-[0.875rem] py-[0.65rem] w-full outline-none transition-all duration-150 placeholder:text-[#6b6b80] focus:border-[#e8ff47] focus:shadow-[0_0_0_2px_rgba(232,255,71,0.1)]" />
+      </div>
+
+      <button type="submit"
+              class="mt-2 bg-[#e8ff47] text-[#0c0c0e] border-none rounded-[4px] px-6 py-[0.8rem] font-['DM_Mono',monospace] text-[0.8rem] font-medium tracking-[0.12em] uppercase cursor-pointer flex items-center justify-between transition-all duration-150 hover:bg-[#b8cc2a] active:scale-[0.99]">
+        <span>Login</span>
+        <span class="text-base">→</span>
+      </button>
+    </form>
+
+    <p class="mt-6 font-['DM_Mono',monospace] text-[0.78rem] text-[#6b6b80] pt-6 border-t border-[#2a2a32]">
+      No account yet?
+      <a routerLink="/register" class="text-[#e8ff47] no-underline ml-1 hover:underline">Create one</a>
+    </p>
+  </div>
+
+  <div class="flex-1 flex items-center justify-center pl-12">
+    <div class="font-['Bebas_Neue',sans-serif] text-[clamp(4rem,10vw,9rem)] leading-[0.9] tracking-[0.05em] text-[#1c1c21] select-none">REPAIR<br>DESK</div>
+  </div>
 </div>

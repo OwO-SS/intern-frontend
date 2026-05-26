@@ -1,81 +1,75 @@
-<div class="max-w-2xl mx-auto bg-white shadow rounded-lg p-6">
+<div class="animate-slide-up">
+  <div class="mb-10">
+    <span class="font-['DM_Mono',monospace] text-[0.7rem] tracking-[0.15em] uppercase text-[#e8ff47] block mb-[0.4rem]">{{ itemId ? 'Editing #' + itemId : 'New entry' }}</span>
+    <h1 class="font-['Bebas_Neue',sans-serif] text-5xl tracking-[0.08em] leading-none m-0 mb-4 text-[#f0f0f5]">{{ itemId ? 'EDIT REQUEST' : 'CREATE REQUEST' }}</h1>
+    <div class="h-[2px] w-12 bg-[#e8ff47]"></div>
+  </div>
 
-  <h1 class="text-3xl font-bold mb-6">
-    {{ itemId ? 'Edit Repair Request' : 'Create Repair Request' }}
-  </h1>
+  <div class="grid grid-cols-[1fr_280px] gap-8 items-start max-md:grid-cols-1">
 
-  <form
-    [formGroup]="itemForm"
-    (ngSubmit)="onSubmit()"
-    class="space-y-4"
-  >
+    <div class="bg-[#141417] border border-[#2a2a32] rounded-[6px] p-8">
+      <form [formGroup]="itemForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-6">
 
-    <!-- Title -->
-    <div>
-      <label class="block font-medium mb-1">
-        Title
-      </label>
+        <div class="flex flex-col">
+          <label class="font-['DM_Mono',monospace] text-[0.7rem] tracking-[0.12em] uppercase text-[#6b6b80] block mb-[0.4rem]">Title</label>
+          <input type="text" formControlName="title" placeholder="Describe the repair issue"
+                 class="font-['DM_Mono',monospace] text-[0.875rem] bg-[#1c1c21] border border-[#2a2a32] text-[#f0f0f5] rounded-[4px] px-[0.875rem] py-[0.65rem] w-full outline-none transition-all duration-150 placeholder:text-[#6b6b80] focus:border-[#e8ff47] focus:shadow-[0_0_0_2px_rgba(232,255,71,0.1)]" />
+        </div>
 
-      <input
-        type="text"
-        formControlName="title"
-        class="w-full border rounded px-3 py-2"
-        placeholder="Enter title"
-      />
+        <div class="flex flex-col">
+          <label class="font-['DM_Mono',monospace] text-[0.7rem] tracking-[0.12em] uppercase text-[#6b6b80] block mb-[0.4rem]">Description</label>
+          <textarea formControlName="description" placeholder="Provide full details about the problem..." rows="5"
+                    class="font-['DM_Mono',monospace] text-[0.875rem] bg-[#1c1c21] border border-[#2a2a32] text-[#f0f0f5] rounded-[4px] px-[0.875rem] py-[0.65rem] w-full outline-none transition-all duration-150 placeholder:text-[#6b6b80] focus:border-[#e8ff47] focus:shadow-[0_0_0_2px_rgba(232,255,71,0.1)] resize-y"></textarea>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 max-md:grid-cols-1">
+          <div class="flex flex-col">
+            <label class="font-['DM_Mono',monospace] text-[0.7rem] tracking-[0.12em] uppercase text-[#6b6b80] block mb-[0.4rem]">Status</label>
+            <select formControlName="status"
+                    class="font-['DM_Mono',monospace] text-[0.875rem] bg-[#1c1c21] border border-[#2a2a32] text-[#f0f0f5] rounded-[4px] px-[0.875rem] py-[0.65rem] w-full outline-none transition-all duration-150 focus:border-[#e8ff47] focus:shadow-[0_0_0_2px_rgba(232,255,71,0.1)]">
+              <option value="Pending">Pending</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </div>
+
+          <div class="flex flex-col">
+            <label class="font-['DM_Mono',monospace] text-[0.7rem] tracking-[0.12em] uppercase text-[#6b6b80] block mb-[0.4rem]">Priority</label>
+            <select formControlName="priority"
+                    class="font-['DM_Mono',monospace] text-[0.875rem] bg-[#1c1c21] border border-[#2a2a32] text-[#f0f0f5] rounded-[4px] px-[0.875rem] py-[0.65rem] w-full outline-none transition-all duration-150 focus:border-[#e8ff47] focus:shadow-[0_0_0_2px_rgba(232,255,71,0.1)]">
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-end gap-3 pt-2 border-t border-[#2a2a32]">
+          <a routerLink="/items"
+             class="font-['DM_Mono',monospace] text-[0.75rem] tracking-[0.08em] uppercase text-[#6b6b80] no-underline px-4 py-[0.65rem] rounded-[4px] border border-[#2a2a32] transition-all duration-150 hover:text-[#f0f0f5] hover:border-[#9090a8]">Cancel</a>
+          <button type="submit"
+                  class="bg-[#e8ff47] text-[#0c0c0e] border-none rounded-[4px] px-6 py-[0.65rem] font-['DM_Mono',monospace] text-[0.75rem] font-medium tracking-[0.1em] uppercase cursor-pointer flex items-center gap-[0.6rem] transition-colors duration-150 hover:bg-[#b8cc2a]">
+            <span>{{ itemId ? 'Save Changes' : 'Create Request' }}</span>
+            <span>→</span>
+          </button>
+        </div>
+
+      </form>
     </div>
 
-    <!-- Description -->
-    <div>
-      <label class="block font-medium mb-1">
-        Description
-      </label>
-
-      <textarea
-        formControlName="description"
-        class="w-full border rounded px-3 py-2"
-        placeholder="Enter description"
-      ></textarea>
+    <div class="max-md:hidden">
+      <div class="bg-[#141417] border border-[#2a2a32] rounded-[6px] p-6 sticky top-[72px]">
+        <div class="text-2xl mb-3">💡</div>
+        <p class="font-['DM_Mono',monospace] text-[0.72rem] tracking-[0.1em] uppercase text-[#9090a8] m-0 mb-4">Tips for good reports</p>
+        <ul class="m-0 p-0 list-none flex flex-col gap-[0.6rem]">
+          <li class="font-['DM_Mono',monospace] text-[0.78rem] text-[#6b6b80] leading-[1.5] pl-4 relative before:content-['–'] before:absolute before:left-0 before:text-[#e8ff47]">Include location and equipment details</li>
+          <li class="font-['DM_Mono',monospace] text-[0.78rem] text-[#6b6b80] leading-[1.5] pl-4 relative before:content-['–'] before:absolute before:left-0 before:text-[#e8ff47]">Describe when the issue first occurred</li>
+          <li class="font-['DM_Mono',monospace] text-[0.78rem] text-[#6b6b80] leading-[1.5] pl-4 relative before:content-['–'] before:absolute before:left-0 before:text-[#e8ff47]">Set priority accurately for faster response</li>
+          <li class="font-['DM_Mono',monospace] text-[0.78rem] text-[#6b6b80] leading-[1.5] pl-4 relative before:content-['–'] before:absolute before:left-0 before:text-[#e8ff47]">Attach photos if available</li>
+        </ul>
+      </div>
     </div>
 
-    <!-- Status -->
-    <div>
-      <label class="block font-medium mb-1">
-        Status
-      </label>
-
-      <select
-        formControlName="status"
-        class="w-full border rounded px-3 py-2"
-      >
-        <option value="Pending">Pending</option>
-        <option value="In Progress">In Progress</option>
-        <option value="Completed">Completed</option>
-        <option value="Cancelled">Cancelled</option>
-      </select>
-    </div>
-
-    <!-- Priority -->
-    <div>
-      <label class="block font-medium mb-1">
-        Priority
-      </label>
-
-      <select
-        formControlName="priority"
-        class="w-full border rounded px-3 py-2"
-      >
-        <option value="Low">Low</option>
-        <option value="Medium">Medium</option>
-        <option value="High">High</option>
-      </select>
-    </div>
-
-    <button
-      type="submit"
-      class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-    >
-      Save
-    </button>
-
-  </form>
+  </div>
 </div>
