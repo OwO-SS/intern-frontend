@@ -1,0 +1,29 @@
+<div class="max-w-md mx-auto bg-white shadow rounded-lg p-6">
+  <h1 class="text-3xl font-bold mb-6">Register</h1>
+
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-4">
+    <div>
+      <label class="block font-medium mb-1">Full Name</label>
+      <input formControlName="fullName" class="w-full border rounded px-3 py-2" />
+    </div>
+
+    <div>
+      <label class="block font-medium mb-1">Email</label>
+      <input type="email" formControlName="email" class="w-full border rounded px-3 py-2" />
+    </div>
+
+    <div>
+      <label class="block font-medium mb-1">Password</label>
+      <input type="password" formControlName="password" class="w-full border rounded px-3 py-2" />
+    </div>
+
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">
+      Register
+    </button>
+  </form>
+
+  <p class="mt-4">
+    Already have an account?
+    <a routerLink="/login" class="text-blue-600">Login</a>
+  </p>
+</div>

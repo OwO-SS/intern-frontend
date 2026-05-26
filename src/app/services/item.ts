@@ -14,4 +14,16 @@ export class ItemService {
   getItems(): Observable<Item[]> {
     return this.http.get<Item[]>(this.apiUrl);
   }
+
+  createItem(item: any) {
+    return this.http.post<Item>(this.apiUrl, item);
+  } 
+
+  updateItem(id: number, item: any) {
+    return this.http.put<Item>(`${this.apiUrl}/${id}`, item);
+  }
+
+  deleteItem(id: number) {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
 }

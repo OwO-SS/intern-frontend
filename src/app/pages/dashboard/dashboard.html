@@ -1,1 +1,25 @@
-<p>dashboard works!</p>
+<div class="max-w-5xl mx-auto">
+  <h1 class="text-3xl font-bold mb-6">Dashboard</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div class="bg-white shadow rounded-lg p-6">
+      <p class="text-gray-500">Total Requests</p>
+      <h2 class="text-3xl font-bold">{{ summary.total }}</h2>
+    </div>
+
+    <div class="bg-yellow-100 shadow rounded-lg p-6">
+      <p class="text-yellow-700">Pending</p>
+      <h2 class="text-3xl font-bold">{{ summary.pending }}</h2>
+    </div>
+
+    <div class="bg-green-100 shadow rounded-lg p-6">
+      <p class="text-green-700">Completed</p>
+      <h2 class="text-3xl font-bold">{{ summary.completed }}</h2>
+    </div>
+
+    <div class="bg-red-100 shadow rounded-lg p-6">
+      <p class="text-red-700">High Priority</p>
+      <h2 class="text-3xl font-bold">{{ summary.highPriority }}</h2>
+    </div>
+  </div>
+</div>

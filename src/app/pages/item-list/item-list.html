@@ -22,24 +22,37 @@
       </thead>
 
       <tbody>
-        <tr class="border-t">
-          <td class="p-4">Air conditioner broken</td>
-          <td class="p-4">
-            <span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded text-sm">
-              Pending
-            </span>
-          </td>
-          <td class="p-4">High</td>
-          <td class="p-4 flex gap-2">
-            <button class="bg-green-500 text-white px-3 py-1 rounded">
-              Edit
-            </button>
+        @for (item of items; track item.id) {
+          <tr class="border-t">
+            <td class="p-4">{{ item.title }}</td>
 
-            <button class="bg-red-500 text-white px-3 py-1 rounded">
-              Delete
-            </button>
-          </td>
-        </tr>
+            <td class="p-4">
+              <span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded text-sm">
+                {{ item.status }}
+              </span>
+            </td>
+
+            <td class="p-4">
+              {{ item.priority }}
+            </td>
+
+            <td class="p-4 flex gap-2">
+              <a
+              [routerLink]="['/items/edit', item.id]"
+              class="bg-green-500 text-white px-3 py-1 rounded"
+              >
+                Edit
+              </a>
+
+              <button
+                (click)="deleteItem(item.id)"
+                class="bg-red-500 text-white px-3 py-1 rounded"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        }
       </tbody>
     </table>
   </div>

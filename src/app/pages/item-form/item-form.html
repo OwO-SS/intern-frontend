@@ -1,1 +1,81 @@
-<p>item-form works!</p>
+<div class="max-w-2xl mx-auto bg-white shadow rounded-lg p-6">
+
+  <h1 class="text-3xl font-bold mb-6">
+    {{ itemId ? 'Edit Repair Request' : 'Create Repair Request' }}
+  </h1>
+
+  <form
+    [formGroup]="itemForm"
+    (ngSubmit)="onSubmit()"
+    class="space-y-4"
+  >
+
+    <!-- Title -->
+    <div>
+      <label class="block font-medium mb-1">
+        Title
+      </label>
+
+      <input
+        type="text"
+        formControlName="title"
+        class="w-full border rounded px-3 py-2"
+        placeholder="Enter title"
+      />
+    </div>
+
+    <!-- Description -->
+    <div>
+      <label class="block font-medium mb-1">
+        Description
+      </label>
+
+      <textarea
+        formControlName="description"
+        class="w-full border rounded px-3 py-2"
+        placeholder="Enter description"
+      ></textarea>
+    </div>
+
+    <!-- Status -->
+    <div>
+      <label class="block font-medium mb-1">
+        Status
+      </label>
+
+      <select
+        formControlName="status"
+        class="w-full border rounded px-3 py-2"
+      >
+        <option value="Pending">Pending</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Completed">Completed</option>
+        <option value="Cancelled">Cancelled</option>
+      </select>
+    </div>
+
+    <!-- Priority -->
+    <div>
+      <label class="block font-medium mb-1">
+        Priority
+      </label>
+
+      <select
+        formControlName="priority"
+        class="w-full border rounded px-3 py-2"
+      >
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+      </select>
+    </div>
+
+    <button
+      type="submit"
+      class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+    >
+      Save
+    </button>
+
+  </form>
+</div>
