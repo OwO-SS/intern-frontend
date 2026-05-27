@@ -1,24 +1,31 @@
-<div class="flex flex-col min-h-screen">
-  <nav class="sticky top-0 z-[100] bg-[#0c0c0e]/92 backdrop-blur-[12px] border-b border-[#2a2a32] flex items-center justify-between px-8 h-14">
-    <div class="flex items-center gap-[0.6rem]">
-      <span class="text-[#e8ff47] text-xl leading-none">⬡</span>
-      <span class="font-['Bebas_Neue',sans-serif] text-[1.35rem] tracking-[0.18em] text-[#f0f0f5]">REPAIRDESK</span>
-    </div>
-    <div class="flex items-center gap-1">
-      <a routerLink="/items" routerLinkActive="!text-[#e8ff47] !border-[#e8ff47]/25 !bg-[#e8ff47]/6"
-         class="font-['DM_Mono',monospace] text-[0.72rem] tracking-[0.1em] uppercase text-[#6b6b80] no-underline px-[0.85rem] py-[0.4rem] rounded-[4px] border border-transparent transition-all duration-150 hover:text-[#f0f0f5] hover:border-[#2a2a32] hover:bg-[#141417]">Items</a>
-      <a routerLink="/items/create" routerLinkActive="!text-[#e8ff47] !border-[#e8ff47]/25 !bg-[#e8ff47]/6"
-         class="font-['DM_Mono',monospace] text-[0.72rem] tracking-[0.1em] uppercase text-[#6b6b80] no-underline px-[0.85rem] py-[0.4rem] rounded-[4px] border border-transparent transition-all duration-150 hover:text-[#f0f0f5] hover:border-[#2a2a32] hover:bg-[#141417]">+ Create</a>
-      <a routerLink="/dashboard" routerLinkActive="!text-[#e8ff47] !border-[#e8ff47]/25 !bg-[#e8ff47]/6"
-         class="font-['DM_Mono',monospace] text-[0.72rem] tracking-[0.1em] uppercase text-[#6b6b80] no-underline px-[0.85rem] py-[0.4rem] rounded-[4px] border border-transparent transition-all duration-150 hover:text-[#f0f0f5] hover:border-[#2a2a32] hover:bg-[#141417]">Dashboard</a>
-      <a routerLink="/login" routerLinkActive="!text-[#e8ff47] !border-[#e8ff47]/25 !bg-[#e8ff47]/6"
-         class="font-['DM_Mono',monospace] text-[0.72rem] tracking-[0.1em] uppercase text-[#6b6b80] no-underline px-[0.85rem] py-[0.4rem] rounded-[4px] border border-transparent transition-all duration-150 hover:text-[#f0f0f5] hover:border-[#2a2a32] hover:bg-[#141417]">Login</a>
-      <a routerLink="/register" routerLinkActive="!text-[#e8ff47] !border-[#e8ff47]/25 !bg-[#e8ff47]/6"
-         class="font-['DM_Mono',monospace] text-[0.72rem] tracking-[0.1em] uppercase text-[#6b6b80] no-underline px-[0.85rem] py-[0.4rem] rounded-[4px] border border-transparent transition-all duration-150 hover:text-[#f0f0f5] hover:border-[#2a2a32] hover:bg-[#141417]">Register</a>
-    </div>
-  </nav>
+<nav class="border-b border-white/10 bg-black/80 text-white px-8 py-4 flex justify-between items-center">
+  <a routerLink="/items" class="text-2xl tracking-[0.3em] font-bold">
+    REPAIRDESK
+  </a>
 
-  <main class="flex-1 py-10 px-8 max-w-[1200px] w-full mx-auto">
-    <router-outlet></router-outlet>
-  </main>
+  <div class="flex gap-6 items-center text-sm tracking-widest">
+    <a routerLink="/items">ITEMS</a>
+    <a routerLink="/items/create">+ CREATE</a>
+    <a routerLink="/dashboard">DASHBOARD</a>
+
+    @if (authService.isLoggedIn()) {
+      <span class="text-lime-300">
+        {{ authService.getFullName() }} | {{ authService.getRole() }}
+      </span>
+
+      <button
+        (click)="logout()"
+        class="border border-white/20 px-3 py-1 rounded hover:bg-white/10"
+      >
+        LOGOUT
+      </button>
+    } @else {
+      <a routerLink="/login">LOGIN</a>
+      <a routerLink="/register">REGISTER</a>
+    }
+  </div>
+</nav>
+
+<div class="p-8">
+  <router-outlet></router-outlet>
 </div>

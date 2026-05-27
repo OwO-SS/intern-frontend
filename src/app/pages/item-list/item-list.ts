@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ItemService } from '../../services/item';
+import { AuthService } from '../../services/auth';
 
 @Component({
   selector: 'app-item-list',
@@ -10,28 +11,28 @@ import { ItemService } from '../../services/item';
   styleUrl: './item-list.css',
 })
 export class ItemList {
-  items = [
-    {
-      id: 1,
-      title: 'owo1',
-      status: 'Pending',
-      priority: 'High'
-    },
-    {
-      id: 2,
-      title: 'owo2',
-      status: 'Completed',
-      priority: 'Low'
-    }
-  ]
+  items = signal<any[]>([]);
 
-  constructor(private itemService: ItemService) {}
+  constructor(private itemService: ItemService,
+              public authService: AuthService
+  ) {}
 
-  deleteItem(id: number) {
-    // this.itemService.deleteItem(id).subscribe(() => {
-    //   this.items = this.items.filter(item => item.id !== id);
-    // });
-    this.items = this.items.filter(item => item.id !== id); 
+  ngOnInit() {
+    this.itemService.getItems().subscribe({
+      next: (data: any[]) => {
+        console.log('data from api:', data);
+        this.items.set(data);
+        console.log('items length:', this.items().length);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
 
+  deleteItem(id: number) {
+    this.itemService.deleteItem(id).subscribe(() => {
+      this.items.update(items => items.filter(item => item.id !== id));
+    });
+  }
 }

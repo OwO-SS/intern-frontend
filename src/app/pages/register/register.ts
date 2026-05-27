@@ -22,7 +22,8 @@ export class Register {
   onSubmit() {
     if (this.registerForm.invalid) return;
 
-    this.authService.register(this.registerForm.value);
-    this.router.navigate(['/login']);
+    this.authService.register(this.registerForm.value).subscribe(() => {
+      this.router.navigate(['/login']);
+    });
   }
 }

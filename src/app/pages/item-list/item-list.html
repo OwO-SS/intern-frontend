@@ -1,11 +1,21 @@
+<p class="text-white">Items length: {{ items().length }}</p>
+
 <div class="animate-slide-up">
   <div class="flex items-end justify-between mb-8">
     <div>
-      <span class="font-['DM_Mono',monospace] text-[0.7rem] tracking-[0.15em] uppercase text-[#e8ff47] block mb-[0.4rem]">All entries</span>
-      <h1 class="font-['Bebas_Neue',sans-serif] text-5xl tracking-[0.08em] leading-none m-0 text-[#f0f0f5]">REPAIR REQUESTS</h1>
+      <span class="font-['DM_Mono',monospace] text-[0.7rem] tracking-[0.15em] uppercase text-[#e8ff47] block mb-[0.4rem]">
+        All entries
+      </span>
+
+      <h1 class="font-['Bebas_Neue',sans-serif] text-5xl tracking-[0.08em] leading-none m-0 text-[#f0f0f5]">
+        REPAIR REQUESTS
+      </h1>
     </div>
-    <a routerLink="/items/create"
-       class="inline-flex items-center gap-[0.4rem] bg-[#e8ff47] text-[#0c0c0e] no-underline font-['DM_Mono',monospace] text-[0.75rem] font-medium tracking-[0.1em] uppercase px-5 py-[0.6rem] rounded-[4px] transition-colors duration-150 mb-2 hover:bg-[#b8cc2a]">
+
+    <a
+      routerLink="/items/create"
+      class="inline-flex items-center gap-[0.4rem] bg-[#e8ff47] text-[#0c0c0e] no-underline font-['DM_Mono',monospace] text-[0.75rem] font-medium tracking-[0.1em] uppercase px-5 py-[0.6rem] rounded-[4px] transition-colors duration-150 mb-2 hover:bg-[#b8cc2a]"
+    >
       <span>+</span> New Request
     </a>
   </div>
@@ -20,52 +30,66 @@
           <th class="text-left px-5 py-[0.875rem] font-['DM_Mono',monospace] text-[0.68rem] tracking-[0.12em] uppercase text-[#6b6b80] font-normal">Actions</th>
         </tr>
       </thead>
+
       <tbody>
-        @for (item of items; track item.id) {
+        @for (item of items(); track item.id) {
           <tr class="border-b border-[#2a2a32] last:border-b-0 transition-colors duration-[120ms] hover:bg-[#1c1c21]">
-            <td class="px-5 py-4 align-middle font-['Syne',sans-serif] text-[0.9rem] font-medium text-[#f0f0f5]">{{ item.title }}</td>
+            <td class="px-5 py-4 align-middle font-['Syne',sans-serif] text-[0.9rem] font-medium text-[#f0f0f5]">
+              {{ item.title }}
+            </td>
 
             <td class="px-5 py-4 align-middle">
-              <span class="inline-flex items-center font-['DM_Mono',monospace] text-[0.7rem] font-medium tracking-[0.06em] px-[10px] py-[3px] rounded-[2px] uppercase"
-                [class.bg-[#ffb020]/12]="item.status === 'Pending'"
-                [class.text-[#ffb020]]="item.status === 'Pending'"
-                [class.border]="true"
-                [class.border-[#ffb020]/25]="item.status === 'Pending'"
-                [class.bg-[#4fa3ff]/12]="item.status === 'In Progress'"
-                [class.text-[#4fa3ff]]="item.status === 'In Progress'"
-                [class.border-[#4fa3ff]/25]="item.status === 'In Progress'"
-                [class.bg-[#22d68a]/12]="item.status === 'Completed'"
-                [class.text-[#22d68a]]="item.status === 'Completed'"
-                [class.border-[#22d68a]/25]="item.status === 'Completed'"
-                [class.bg-[#ff4545]/12]="item.status === 'Cancelled'"
-                [class.text-[#ff4545]]="item.status === 'Cancelled'"
-                [class.border-[#ff4545]/25]="item.status === 'Cancelled'">
+              <span
+                class="inline-flex items-center font-['DM_Mono',monospace] text-[0.7rem] font-medium tracking-[0.06em] px-[10px] py-[3px] rounded-[2px] uppercase border"
+                [ngClass]="{
+                  'bg-[#ffb020]/12 text-[#ffb020] border-[#ffb020]/25': item.status === 'Pending',
+                  'bg-[#4fa3ff]/12 text-[#4fa3ff] border-[#4fa3ff]/25': item.status === 'In Progress',
+                  'bg-[#22d68a]/12 text-[#22d68a] border-[#22d68a]/25': item.status === 'Completed',
+                  'bg-[#ff4545]/12 text-[#ff4545] border-[#ff4545]/25': item.status === 'Cancelled'
+                }"
+              >
                 {{ item.status }}
               </span>
             </td>
 
             <td class="px-5 py-4 align-middle">
-              <span class="inline-flex items-center font-['DM_Mono',monospace] text-[0.7rem] font-medium tracking-[0.06em] px-[10px] py-[3px] rounded-[2px] uppercase border"
-                [class.bg-[#6b6b80]/15]="item.priority === 'Low'"
-                [class.text-[#9090a8]]="item.priority === 'Low'"
-                [class.border-[#2a2a32]]="item.priority === 'Low'"
-                [class.bg-[#ffb020]/12]="item.priority === 'Medium'"
-                [class.text-[#ffb020]]="item.priority === 'Medium'"
-                [class.border-[#ffb020]/25]="item.priority === 'Medium'"
-                [class.bg-[#ff4545]/12]="item.priority === 'High'"
-                [class.text-[#ff4545]]="item.priority === 'High'"
-                [class.border-[#ff4545]/25]="item.priority === 'High'">
+              <span
+                class="inline-flex items-center font-['DM_Mono',monospace] text-[0.7rem] font-medium tracking-[0.06em] px-[10px] py-[3px] rounded-[2px] uppercase border"
+                [ngClass]="{
+                  'bg-[#6b6b80]/15 text-[#9090a8] border-[#2a2a32]': item.priority === 'Low',
+                  'bg-[#ffb020]/12 text-[#ffb020] border-[#ffb020]/25': item.priority === 'Medium',
+                  'bg-[#ff4545]/12 text-[#ff4545] border-[#ff4545]/25': item.priority === 'High'
+                }"
+              >
                 {{ item.priority }}
               </span>
             </td>
 
             <td class="px-5 py-4 align-middle">
               <div class="flex gap-2">
-                <a [routerLink]="['/items/edit', item.id]"
-                   class="font-['DM_Mono',monospace] text-[0.7rem] tracking-[0.08em] uppercase text-[#4fa3ff] border border-[#4fa3ff]/30 px-3 py-[0.35rem] rounded-[4px] no-underline cursor-pointer transition-all duration-150 bg-transparent hover:bg-[#4fa3ff]/10">Edit</a>
-                <button (click)="deleteItem(item.id)"
-                        class="font-['DM_Mono',monospace] text-[0.7rem] tracking-[0.08em] uppercase text-[#ff4545] border border-[#ff4545]/30 px-3 py-[0.35rem] rounded-[4px] cursor-pointer transition-all duration-150 bg-transparent hover:bg-[#ff4545]/10">Delete</button>
+                <a
+                  [routerLink]="['/items/edit', item.id]"
+                  class="font-['DM_Mono',monospace] text-[0.7rem] tracking-[0.08em] uppercase text-[#4fa3ff] border border-[#4fa3ff]/30 px-3 py-[0.35rem] rounded-[4px] no-underline cursor-pointer transition-all duration-150 bg-transparent hover:bg-[#4fa3ff]/10"
+                >
+                  Edit
+                </a>
+
+                @if (authService.getRole() === 'Admin') {
+                  <button
+                    type="button"
+                    (click)="deleteItem(item.id)"
+                    class="font-['DM_Mono',monospace] text-[0.7rem] tracking-[0.08em] uppercase text-[#ff4545] border border-[#ff4545]/30 px-3 py-[0.35rem] rounded-[4px] cursor-pointer transition-all duration-150 bg-transparent hover:bg-[#ff4545]/10"
+                  >
+                    Delete
+                  </button>
+                }
               </div>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="4" class="px-5 py-8 text-center text-[#6b6b80] font-['DM_Mono',monospace] text-sm">
+              No repair requests found
             </td>
           </tr>
         }

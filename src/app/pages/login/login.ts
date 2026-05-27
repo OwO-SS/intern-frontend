@@ -23,15 +23,15 @@ export class Login {
   onSubmit() {
     if (this.loginForm.invalid) return;
 
-    const email = this.loginForm.value.email || '';
-    const password = this.loginForm.value.password || '';
-
-    const success = this.authService.login(email, password);
-
-    if (success) {
-      this.router.navigate(['/items']);
-    } else {
-      this.errorMessage = 'Invalid email or password';
-    }
+    this.authService.login(this.loginForm.value).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.authService.saveLoginData(res);
+        this.router.navigate(['/items']);
+      },
+      error: () => {
+        this.errorMessage = 'Invalid email or password';
+      }
+    });
   }
 }

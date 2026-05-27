@@ -38,35 +38,39 @@ export class ItemForm {
     if (id) {
       this.itemId = Number(id);
 
-      this.itemForm.patchValue({
-        title: 'Air conditioner broken',
-        description: 'Air conditioner is not working',
-        status: 'Pending',
-        priority: 'High',
-        relatedUserId: '1'
+      this.itemService.getItemById(this.itemId).subscribe({
+        next: (item: any) => {
+          this.itemForm.patchValue({
+            title: item.title,
+            description: item.description,
+            status: item.status,
+            priority: item.priority,
+            relatedUserId: String(item.relatedUserId)
+          });
+        },
+        error: (err) => {
+          console.log(err);
+        }
       });
     }
   }
 
   onSubmit() {
-
     console.log(this.itemForm.value);
-    
+
     if (this.itemForm.invalid) {
       this.itemForm.markAllAsTouched();
       return;
     }
 
-    // if (this.itemId) {
-    //   this.itemService.updateItem(this.itemId, this.itemForm.value as any).subscribe(() => {
-    //     this.router.navigate(['/items']);
-    //   });
-    // } else {
-    //   this.itemService.createItem(this.itemForm.value as any).subscribe(() => {
-    //     this.router.navigate(['/items']);
-    //   });
-    // }
-
-    this.router.navigate(['/items']);
+    if (this.itemId) {
+      this.itemService.updateItem(this.itemId, this.itemForm.value as any).subscribe(() => {
+        this.router.navigate(['/items']);
+      });
+    } else {
+      this.itemService.createItem(this.itemForm.value as any).subscribe(() => {
+        this.router.navigate(['/items']);
+      });
+    }
   }
 }
