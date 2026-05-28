@@ -85,12 +85,13 @@
         </div>
 
         <div class="flex items-center justify-end gap-3 pt-2 border-t border-[#2a2a32]">
-          <a
-            routerLink="/items"
-            class="font-['DM_Mono',monospace] text-[0.75rem] tracking-[0.08em] uppercase text-[#6b6b80] no-underline px-4 py-[0.65rem] rounded-[4px] border border-[#2a2a32] transition-all duration-150 hover:text-[#f0f0f5] hover:border-[#9090a8]"
+          <button
+            type="button"
+            (click)="goBack()"
+            class="font-['DM_Mono',monospace] text-[0.75rem] tracking-[0.08em] uppercase text-[#6b6b80] px-4 py-[0.65rem] rounded-[4px] border border-[#2a2a32] transition-all duration-150 hover:text-[#f0f0f5] hover:border-[#9090a8] bg-transparent cursor-pointer"
           >
             Cancel
-          </a>
+          </button>
 
           <button
             type="submit"

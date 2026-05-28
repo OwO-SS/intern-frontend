@@ -73,4 +73,8 @@ export class ItemForm {
       });
     }
   }
+  
+  goBack() {
+    this.router.navigate(['/items']);
+  }
 }
