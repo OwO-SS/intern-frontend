@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DashboardService } from '../../services/dashboard';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,10 +9,31 @@ import { CommonModule } from '@angular/common';
   styleUrl: './dashboard.css'
 })
 export class Dashboard {
-  summary = {
-    total: 2,
-    pending: 1,
-    completed: 1,
-    highPriority: 1
-  };
+
+  summary = signal({
+    total: 0,
+    pending: 0,
+    completed: 0,
+    totalUsers: 0
+  });
+
+  constructor(private dashboardService: DashboardService) {}
+
+  ngOnInit() {
+    this.dashboardService.getSummary().subscribe({
+      next: (data) => {
+        console.log(data);
+
+        this.summary.set({
+          total: data.totalTickets,
+          pending: data.pendingTickets,
+          completed: data.completedTickets,
+          totalUsers: data.totalUsers
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
 }
